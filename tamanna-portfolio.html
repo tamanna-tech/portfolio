@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamanna KC - UI/UX Designer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #FF6584;
+            --dark-bg: #1a1a2e;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: #333 !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s 0.2s backwards;
+        }
+        
+        .btn-custom {
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            margin: 0 10px;
+        }
+        
+        .btn-primary-custom {
+            background: white;
+            color: var(--primary-color);
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+        }
+        
+        .about-section {
+            padding: 100px 0;
+        }
+        
+        .skill-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .experience-card {
+            background: white;
+            border-left: 4px solid var(--primary-color);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .experience-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .experience-card h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .experience-card .company {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .project-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            margin-bottom: 30px;
+            background: white;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .project-info {
+            padding: 25px;
+        }
+        
+        .project-info h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.85rem;
+        }
+        
+        .contact-section {
+            background: var(--dark-bg);
+            color: white;
+            padding: 100px 0;
+        }
+        
+        .contact-info {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            background: #0f0f1e;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">TK</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="hero-content">
+                        <h1>Hi, I'm Tamanna KC</h1>
+                        <p>UI/UX Designer | Creative Problem Solver | Frontend Enthusiast</p>
+                        <p class="lead">Crafting user-centered and visually compelling designs that bring ideas to life.</p>
+                        <div class="mt-4">
+                            <a href="#projects" class="btn btn-custom btn-primary-custom">View My Work</a>
+                            <a href="#contact" class="btn btn-custom btn-outline-custom">Contact Me</a>
+                        </div>
+                        <div class="social-links mt-5">
+                            <a href="https://www.behance.net" target="_blank"><i class="fab fa-behance"></i></a>
+                            <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                            <a href="mailto:kctamanna77@gmail.com"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 fade-in">
+                    <h3 class="mb-4">Hello! I'm Tamanna</h3>
+                    <p class="lead">An enthusiastic and detail-oriented UI/UX Designer with a strong foundation in computer science.</p>
+                    <p>I'm passionate about creating intuitive user experiences and improving usability through research-driven design. Currently pursuing my Bachelor's in Computer Science & Information Technology at Nagarjuna College, I combine technical knowledge with creative design skills to build meaningful digital experiences.</p>
+                    <p>When I'm not designing, you'll find me exploring digital marketing, creating content for social media, or traveling to find new inspiration.</p>
+                    <div class="mt-4">
+                        <h5><i class="fas fa-graduation-cap me-2" style="color: var(--primary-color);"></i>Education</h5>
+                        <p><strong>BSc. CSIT</strong> (2020-Present)<br>Nagarjuna College of Information Technology</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row fade-in">
+                        <div class="col-md-6">
+                            <div class="skill-card text-center">
+                                <i class="fas fa-pencil-ruler"></i>
+                                <h5>UI/UX Design</h5>
+                                <p>Figma, Wireframing, Prototyping</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-card text-center">
+                                <i class="fas fa-palette"></i>
+                                <h5>Graphic Design</h5>
+                                <p>Illustrator, Photoshop, Canva</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-card text-center">
+                                <i class="fas fa-code"></i>
+                                <h5>Frontend Dev</h5>
+                                <p>HTML, CSS, JavaScript</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-card text-center">
+                                <i class="fas fa-video"></i>
+                                <h5>Content Creation</h5>
+                                <p>Video Editing, Social Media</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Experience</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="experience-card fade-in">
+                        <h4>UI/UX Designer Intern</h4>
+                        <p class="company">Codesc Nepal | March 2025 - May 2025</p>
+                        <ul>
+                            <li>Designed web/mobile interfaces and ERP dashboards</li>
+                            <li>Created wireframes and prototypes in Figma</li>
+                            <li>Improved UX through feedback and user testing</li>
+                            <li>Ensured responsive handoff with developers</li>
+                            <li>Supported branding with icons, banners, and style guides</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-card fade-in">
+                        <h4>Graphic Design Intern</h4>
+                        <p class="company">Danson Solution | November 2024 - March 2025</p>
+                        <ul>
+                            <li>Designed interactive UI and game elements for e-learning platforms</li>
+                            <li>Created educational graphics and animations</li>
+                            <li>Collaborated with developers to build user-friendly interfaces</li>
+                            <li>Utilized Photoshop, Illustrator, Figma, and game tools</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="experience-card fade-in">
+                        <h4>Trainee UI/UX Designer</h4>
+                        <p class="company">Upskills Nepal | August - September 2024</p>
+                        <ul>
+                            <li>Completed 45-hour comprehensive UI/UX training</li>
+                            <li>Designed prototypes in Figma</li>
+                            <li>Improved usability by 15% through testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&h=400&fit=crop" alt="Aurora Reads">
+                        <div class="project-info">
+                            <h4>Aurora Reads</h4>
+                            <p>E-commerce UI design for books with intuitive browsing and checkout experience.</p>
+                            <div class="tags">
+                                <span class="tag">UI/UX</span>
+                                <span class="tag">E-commerce</span>
+                                <span class="tag">Figma</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=600&h=400&fit=crop" alt="GearGlitch">
+                        <div class="project-info">
+                            <h4>GearGlitch</h4>
+                            <p>E-commerce clone for gaming products featuring modern design and smooth interactions.</p>
+                            <div class="tags">
+                                <span class="tag">UI Design</span>
+                                <span class="tag">Gaming</span>
+                                <span class="tag">Responsive</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&h=400&fit=crop" alt="Formal Attire">
+                        <div class="project-info">
+                            <h4>Formal Attire Website</h4>
+                            <p>Elegant e-commerce UI design for formal wear with sophisticated aesthetics.</p>
+                            <div class="tags">
+                                <span class="tag">Web Design</span>
+                                <span class="tag">Fashion</span>
+                                <span class="tag">UI/UX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop" alt="Mann Lake">
+                        <div class="project-info">
+                            <h4>Mann Lake Ltd. Redesign</h4>
+                            <p>UI/UX redesign of a real-world beekeeping product website improving navigation and user flow.</p>
+                            <div class="tags">
+                                <span class="tag">Redesign</span>
+                                <span class="tag">UX Research</span>
+                                <span class="tag">Prototyping</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 fade-in">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="BYD Dashboard">
+                        <div class="project-info">
+                            <h4>BYD Dashboard</h4>
+                            <p>Analytics dashboard design with data visualization and intuitive interface.</p>
+                            <div class="tags">
+                                <span class="tag">Dashboard</span>
+                                <span class="tag">Data Viz</span>
+                                <span class="tag">UI Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title text-white">Get In Touch</h2>
+                <p class="lead">Let's create something amazing together!</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info text-center fade-in">
+                        <i class="fas fa-envelope"></i>
+                        <h5>Email</h5>
+                        <p><a href="mailto:kctamanna77@gmail.com" style="color: white;">kctamanna77@gmail.com</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info text-center fade-in">
+                        <i class="fas fa-phone"></i>
+                        <h5>Phone</h5>
+                        <p>+977-9862575894</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-info text-center fade-in">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h5>Location</h5>
+                        <p>Kathmandu, Nepal</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <h4 class="mb-4">Connect With Me</h4>
+                <div class="social-links">
+                    <a href="https://www.behance.net" target="_blank"><i class="fab fa-behance"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:kctamanna77@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Tamanna KC. Designed with <i class="fas fa-heart" style="color: var(--secondary-color);"></i></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Smooth scrolling
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                const target = $(this.getAttribute('href'));
+                if(target.length) {
+                    $('html, body').stop().animate({
+                        scrollTop: target.offset().top - 70
+                    }, 1000);
+                }
+            });
+
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                if($(this).scrollTop() > 50) {
+                    $('.navbar').addClass('scrolled');
+                } else {
+                    $('.navbar').removeClass('scrolled');
+                }
+            });
+
+            // Fade in animation on scroll
+            function checkFadeIn() {
+                $('.fade-in').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const viewportBottom = $(window).scrollTop() + $(window).height();
+                    
+                    if(elementTop < viewportBottom - 100) {
+                        $(this).addClass('visible');
+                    }
+                });
+            }
+
+            $(window).on('scroll', checkFadeIn);
+            checkFadeIn(); // Initial check
+
+            // Active nav link on scroll
+            $(window).on('scroll', function() {
+                const scrollPos = $(window).scrollTop() + 100;
+                
+                $('section').each(function() {
+                    const section = $(this);
+                    const sectionTop = section.offset().top;
+                    const sectionHeight = section.outerHeight();
+                    const id = section.attr('id');
+                    
+                    if(scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        $('.nav-link').removeClass('active');
+                        $('.nav-link[href="#' + id + '"]').addClass('active');
+                    }
+                });
+            });
+
+            // Collapse navbar on mobile after clicking
+            $('.nav-link').on('click', function() {
+                $('.navbar-collapse').collapse('hide');
+            });
+        });
+    </script>
+</body>
+</html>
